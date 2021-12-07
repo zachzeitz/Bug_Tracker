@@ -2,16 +2,6 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <h1 align="center">Tickets</h1>
-<ul class="list-group list-group-flush" id="tickets">
-    {% for ticket in user.tickets %}
-    <li class="list-group-item">
-        {{ ticket.data }}
-        <button type="button" class="close" onClick="deleteTicket(ticket.id);deleteTicket(ticket.title)">
-           <span aria-hidden="true">&times;</span>
-        </button>
-    </li>
-    {% endfor%}
-</ul>
 <form method="POST">
     <textarea name="title" id="title" class="form-control" placeholder="Title"></textarea>
     <br />
@@ -20,5 +10,15 @@
     <div align="center">
         <button type="submit" class="btn btn-primary">Add Ticket</button>
     </div>    
-    </form>
+</form>
+<ul class="list-group list-group-flush" id="tickets">
+    {% for ticket in user.tickets %}
+    <li class="list-group-item">
+        {{ ticket.data }}
+        <button type="button" class="close" onClick="deleteTicket({{ticket.id}})">
+           <span aria-hidden="true">&times;</span>
+        </button>
+    </li>
+    {% endfor%}
+</ul>
 {% endblock %}
