@@ -13,12 +13,16 @@
 </form>
 <ul class="list-group list-group-flush" id="tickets">
     {% for ticket in user.tickets %}
+    {{ ticket.title }}
+    <!-- {{ ticket.title }} -->
+    <br />
     <li class="list-group-item">
         {{ ticket.data }}
-        <button type="button" class="close" onClick="deleteTicket({{ticket.id}})">
+        <br />
+        <button type="button" class="close" onClick="deleteTicket({{ ticket.id }});deleteTicket({{ ticket.title }})">
            <span aria-hidden="true">&times;</span>
         </button>
     </li>
-    {% endfor%}
+    {% endfor %}
 </ul>
 {% endblock %}

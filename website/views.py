@@ -30,9 +30,14 @@ def delete_ticket():
     ticket= json.loads(request.data)
     ticketId= ticket['ticketId']
     ticket= Ticket.query.get(ticketId)
+
+    #title= json.loads(request.data)
+    #titleId= title['titleId']
+    #title= Title.query.get(titleId)
     
     if ticket:
         if ticket.user_id == current_user.id:
             db.session.delete(ticket)
+            #db.session.delete(title)
             db.session.commit()
     return jsonify({})
