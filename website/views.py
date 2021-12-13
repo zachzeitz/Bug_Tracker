@@ -11,14 +11,14 @@ views= Blueprint('views', __name__)
 def home():
     if request.method == 'POST':
         ticket= request.form.get('ticket')
-        title= request.form.get('title')
+        title= request.form['title']
 
         if len(ticket) < 1:
             flash('Ticket is too short', category='error')
         else:
-            new_title= Ticket(data=title, user_id= current_user.id)
-            new_ticket= Ticket(data=ticket, user_id=current_user.id)
-            db.session.add(new_title)
+            #new_title= Ticket(data=title, user_id= current_user.id)
+            new_ticket= Ticket(data=ticket, title=title, user_id=current_user.id)
+            #db.session.add(new_title)
             db.session.add(new_ticket)
             db.session.commit()
             flash('Ticket posted', category='success')

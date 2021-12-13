@@ -14,14 +14,14 @@
 <ul class="list-group list-group-flush" id="tickets">
     {% for ticket in user.tickets %}
     <!-- reminder to self about how to comment in html -->
-    {{ ticket.title}}
     <br />
+    {{ ticket.title }}
     <li class="list-group-item">
         {{ ticket.data }}
         <br />
-        <button type="button" class="close" onClick="deleteTicket({{ ticket.id }});deleteTicket({{ ticket.title }})">
-           <span aria-hidden="true">&times;</span>
-        </button>
+    <button type="button" class="close" onClick="deleteTicket({{ ticket.id }})">
+        <span aria-hidden="true">&times;</span>
+    </button>
     </li>
     {% endfor %}
 </ul>

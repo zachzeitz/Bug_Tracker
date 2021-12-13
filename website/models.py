@@ -18,9 +18,3 @@ class User(db.Model, UserMixin):
     first_name= db.Column(db.String(150))
     #allows users to access all tickets they have created
     tickets= db.relationship('Ticket')
-
-class Title(db.Model):
-    id= db.Column(db.Integer, primary_key=True)
-    data= db.Column(db.String(150))
-    user_id= db.Column(db.Integer, db.ForeignKey('ticket.id'))
-    titles= db.relationship('Ticket', uselist=False)
