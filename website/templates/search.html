@@ -2,12 +2,22 @@
 {% block title %}Search{% endblock %}
 {% block content %}
 <form method="POST">
-    <h3 align="center">Sign Up</h3>
+    <h3 align="center">Search</h3>
     <div class="form-group">
         <label for="search">Search Notes</label>
         <input type="text" class="form-control" id="search" name="search" placeholder="Enter search parameters">
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Search</button>
-
+<ul class="list-group list-group-flush" id="tickets">
+    {% for ticket in tickets %}
+        <!-- reminder to self about how to comment in html -->
+    <br />
+    {{ ticket.title }}
+    <li class="list-group-item">
+        {{ ticket.data }}
+        <br />
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, flash, request, jsonify  
+from flask import Blueprint, render_template, flash, request, jsonify, redirect
 from flask_login import  login_required, current_user
 from .models import Ticket
 from . import db 
@@ -16,9 +16,7 @@ def home():
         if len(ticket) < 1:
             flash('Ticket is too short', category='error')
         else:
-            #new_title= Ticket(data=title, user_id= current_user.id)
             new_ticket= Ticket(data=ticket, title=title, user_id=current_user.id)
-            #db.session.add(new_title)
             db.session.add(new_ticket)
             db.session.commit()
             flash('Ticket posted', category='success')
@@ -30,14 +28,9 @@ def delete_ticket():
     ticket= json.loads(request.data)
     ticketId= ticket['ticketId']
     ticket= Ticket.query.get(ticketId)
-
-    #title= json.loads(request.data)
-    #titleId= title['titleId']
-    #title= Title.query.get(titleId)
     
     if ticket:
         if ticket.user_id == current_user.id:
             db.session.delete(ticket)
-            #db.session.delete(title)
             db.session.commit()
     return jsonify({})

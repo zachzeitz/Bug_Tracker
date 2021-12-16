@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, Ticket
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db 
 from flask_login import login_user, login_required, logout_user, current_user
@@ -63,5 +63,16 @@ def sign_up():
 
 @auth.route('/search', methods=['GET', 'POST'])
 def search():
-    return render_template("search.html", user=current_user)
+    if request.method == 'POST':
+        form= request.form
+        print(form)
+        search_value= form['search']
+        print(search_value)
+        search= "%{0}%".format(search_value)
+        print(search)
+        results= Ticket.query.filter(Ticket.title.like(search)).all()
+        print(results)
+        return render_template("search.html", user=current_user, tickets=results )
+    else:
+       return render_template("search.html", user=current_user)
 
