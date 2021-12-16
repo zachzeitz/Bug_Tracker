@@ -65,13 +65,9 @@ def sign_up():
 def search():
     if request.method == 'POST':
         form= request.form
-        print(form)
         search_value= form['search']
-        print(search_value)
         search= "%{0}%".format(search_value)
-        print(search)
         results= Ticket.query.filter(Ticket.title.like(search)).all()
-        print(results)
         return render_template("search.html", user=current_user, tickets=results )
     else:
        return render_template("search.html", user=current_user)
